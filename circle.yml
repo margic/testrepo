@@ -18,8 +18,7 @@ deployment:
     branch: master
     commands:
       # Build the builder image
-      - cd $CIRCLE_ARTIFACTS/out
-      - docker build -t pcrofts/testrepo .
+      - docker build -t pcrofts/testrepo $CIRCLE_ARTIFACTS/out
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       # no need to push every time for testing build.
       - docker push pcrofts/testrepo

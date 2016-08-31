@@ -1,0 +1,13 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  override:
+    - echo Build goes here
+
+test:
+  override:
+    # run the tests and output a junit style report in the circle folder
+    - mkdir -p $CIRCLE_TEST_REPORTS/junit
+    - docker run -it --rm --volume $CIRCLE_TEST_REPORTS/junit:/results pcrofts/goscratch test --package github.org/margic/testrepo

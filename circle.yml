@@ -15,3 +15,14 @@ test:
     # run the tests and output a junit style report in the circle folder
     - mkdir -p $CIRCLE_TEST_REPORTS/junit
     - docker run -it --rm --volume $CIRCLE_TEST_REPORTS/junit:/results pcrofts/goscratch test --package github.com/margic/testrepo
+
+deployment:
+  hub:
+    branch: master
+    commands:
+      # Build the builder image
+      - cd $CIRCLE_ARTIFACTS/out
+      - docker build -t pcrofts/testrepo .
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      # no need to push every time for testing build.
+      - docker push pcrofts/testrepo

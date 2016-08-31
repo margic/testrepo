@@ -5,13 +5,13 @@ machine:
 dependencies:
   override:
     - mkdir -p $CIRCLE_ARTIFACTS/out
-    - docker run -it --rm --volume $CIRCLE_ARTIFACTS/out:/out pcrofts/goscratch build --package github.com/margic/testrepo
+    - docker run -it --rm -e "LOGGING=DEBUG" --volume $CIRCLE_ARTIFACTS/out:/out pcrofts/goscratch build --package github.com/margic/testrepo
 
 test:
   override:
     # run the tests and output a junit style report in the circle folder
     - mkdir -p $CIRCLE_TEST_REPORTS/junit
-    - docker run -it --rm --volume $CIRCLE_TEST_REPORTS/junit:/results pcrofts/goscratch test --package github.com/margic/testrepo
+    - docker run -it --rm -e "LOGGING=DEBUG" --volume $CIRCLE_TEST_REPORTS/junit:/results pcrofts/goscratch test --package github.com/margic/testrepo
 
 deployment:
   hub:

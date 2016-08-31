@@ -8,7 +8,7 @@ dependencies:
     - docker run -it --rm --volume $CIRCLE_ARTIFACTS/out:/out pcrofts/goscratch build --package github.com/margic/testrepo
   post:
     - ls $CIRCLE_ARTIFACTS/out
-    - ./goapp
+    - $CIRCLE_ARTIFACTS/out/goapp
 
 test:
   override:
